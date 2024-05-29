@@ -1,0 +1,98 @@
+#ls-outer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.log-sign-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 3px;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.326) 0px 3px 8px;
+}
+
+.log-sign-box > h1 {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: #5e17eb;
+    font-size: xx-large;
+    margin: 0px;
+    margin-bottom: 1.5rem;
+}
+
+
+/* 
+SIGNUP STYLES
+*/
+
+#signup-form {
+    width: 100%;
+}
+
+.signup_input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.signup_inputs {
+    border: none;
+    border-bottom: #b7b7b7b9 1.5px solid;
+    height: 1.5rem;
+    margin-bottom: 5px;
+    outline: none;
+    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.signup_inputs:hover {
+    border: none;
+    border-bottom: #eb12cc 1.5px solid;
+}
+
+.signup_inputs:focus {
+    border: none;
+    border-bottom: #5e17eb 1.5px solid;
+}
+
+.signup_labels {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+#su_btn_box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+
+
+/* 
+FOOTER STYLES
+*/
+
+#sign-log-footer {
+    position: fixed;
+    bottom: 0px;
+    background-color: #5e17eb;
+    width: 100vw;
+    text-align: center;
+    padding: 5px;
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: large;
+    letter-spacing: 1px;
+}

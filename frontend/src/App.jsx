@@ -1,11 +1,25 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import UserOptions from './components/UserOptions/UserOptions';
+import HomePage from './components/HomePage/HomePage';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currUser, setCurrUser] = useState({});
+
+  const afterLogin = (user) => {
+    setCurrUser(user);
+  }
 
   return (
     <>
-      <h1>Hi</h1>
+      {
+        loggedIn ? (
+          <HomePage currUser={currUser} />
+        ) : (
+          <UserOptions afterLogin={afterLogin}/>
+        )
+      }
     </>
   )
 }
