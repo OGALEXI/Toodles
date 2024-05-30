@@ -43,6 +43,7 @@ class Todo(db.Model):
     title = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(80), nullable=False)
     date_due = db.Column(db.String(80), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = relationship("User", back_populates="todos")
@@ -53,5 +54,6 @@ class Todo(db.Model):
             "title": self.title,
             "description": self.description,
             "dateDue": self.date_due,
+            "completed": self.completed,
             "userId": self.user_id
         }

@@ -9,13 +9,19 @@ function App() {
 
   const afterLogin = (user) => {
     setCurrUser(user);
+    setLoggedIn(true);
+  }
+
+  const afterLogout = () => {
+    setCurrUser({});
+    setLoggedIn(false);
   }
 
   return (
     <>
       {
         loggedIn ? (
-          <HomePage currUser={currUser} />
+          <HomePage currUser={currUser} afterLogout={afterLogout} />
         ) : (
           <UserOptions afterLogin={afterLogin}/>
         )

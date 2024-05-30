@@ -33,10 +33,11 @@ function UserOptions({ afterLogin }) {
       const res = await fetch('http://localhost:8000/new-user', options);
       if (res.status !== 201) {
         const data = await res.json();
-        console.log(data.message)
+        alert(data.message)
       } else {
         //LOGIN USER
-        console.log("success")
+        let user = await res.json();
+        afterLogin(user);
       }
     } catch(e) {
       console.log("An error occured", e)
@@ -49,8 +50,38 @@ function UserOptions({ afterLogin }) {
   }
 
   //submit login function
-  const submitLogin = (e) => {
+  const submitLogin = async (e) => {
     e.preventDefault();
+
+    const user = {
+      email,
+      password
+    }
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
+    }
+
+    try {
+      let res = await fetch('http://localhost:8000/login', options);
+      if (res.status !== 200) {
+        let data = await res.json();
+        alert(data.message)
+      } else {
+        //LOGIN USER
+        let user = await res.json();
+        afterLogin(user);
+      }
+    } catch (e) {
+      console.log("An error occured.", e)
+    }
+
+    setEmail('');
+    setPassword('');
   }
 
   return (

@@ -1,0 +1,55 @@
+#hp-main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    justify-content: center;
+}
+#homepage-header {
+    display: flex;
+    width: 90vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+#homepage-header > h1 {
+    color: white;
+    letter-spacing: 1px;
+    font-family: "Roboto", serif;
+    font-weight: 300;
+}
+
+#logout_btn {
+    padding: 5px 15px 5px 15px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 3px;
+    color: white;
+    font-size: large;
+    box-shadow: rgba(0, 0, 0, 0.326) 0px 3px 8px;
+    font-weight: 300;
+}
+
+#logout_btn:hover {
+    box-shadow: #eb12cba6 0px 3px 8px;
+    cursor: pointer;
+}
+
+/* TODO STYLES */
+
+#todo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-tabs {
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    color: white;
+    margin: 10px;
+    font-size: 24px;
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+}

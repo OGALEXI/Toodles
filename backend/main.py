@@ -18,12 +18,12 @@ def login():
     user = User.query.filter(User.email == email).first()
 
     if not user:
-        return jsonify({ "message": "User not found." }), 400
+        return jsonify({ "message": "User not found." }), 404
     
     if user and not user.check_password(password):
         return jsonify({ "message": "Password is incorrect."}), 400
     
-    return jsonify({ "message": "Successfully logged in."}), 200
+    return user.to_json(), 200
 
 
 #CREATE NEW USER
@@ -60,6 +60,28 @@ def get_user_todos(user_id):
 
     return jsonify({'todos': json_todos}), 200
 
+#GET COMPLETED TODOS
+@app.route('/completed/<int:user_id>', methods=["GET"])
+def get_completed_todos(user_id):
+    completed_todos = Todo.query.filter(
+        Todo.user_id == user_id
+    ).filter(Todo.completed == True).all()
+
+    json_todos = list(map(lambda x: x.to_json(), completed_todos))
+
+    return jsonify({ "completed: ": json_todos }), 200
+
+#GET UPCOMING TODOS
+@app.route('/upcoming/<int:user_id>', methods=["GET"])
+def get_upcoming_todos(user_id):
+    upcoming_todos = Todo.query.filter(
+        Todo.user_id == user_id
+    ).filter(Todo.completed == False).all()
+
+    json_todos = list(map(lambda x: x.to_json(), upcoming_todos))
+
+    return jsonify({ "upcoming: ": json_todos }), 200
+
 #CREATE NEW _TODO
 @app.route('/new-todo/<int:user_id>', methods=["POST"])
 def create_todo(user_id):
@@ -80,7 +102,23 @@ def create_todo(user_id):
     except Exception as e:
         return jsonify({ "message": str(e) }), 500
     
-    return jsonify({ "message": "Todo successfully created" }), 201
+    return jsonify({ "message": new_todo.to_json() }), 201
+
+#TOGGLE COMPLETE
+@app.route('/toggle-complete/<int:todo_id>', methods=["POST"])
+def complete_todo(todo_id):
+    todo = Todo.query.get(todo_id)
+
+    if not todo:
+        return jsonify({ "message": "Todo not found." }), 404
+    
+    todo.completed = not todo.completed
+
+    db.session.commit()
+    return jsonify({ "Completed state": todo.completed})
+    
+
+
 
 if __name__ == "__main__":
     with app.app_context():
