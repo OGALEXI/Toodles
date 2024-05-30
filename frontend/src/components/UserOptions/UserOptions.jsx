@@ -25,7 +25,34 @@ function UserOptions({ afterLogin }) {
 
             <div class="log-sign-box">
               <h1>Login</h1>
-              <p>Don't have an accout? <button onClick={() => setLoginOrSignup('signup')}>Sign up here.</button></p>
+              <form>
+              <div class="signup_input">
+                    <label className='signup_labels' htmlFor='email'>Email </label>
+                    <input
+                        className='signup_inputs'
+                        type="text"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div class="signup_input">
+                    <label className='signup_labels' htmlFor='password'>Password </label>
+                    <input
+                        className='signup_inputs'
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div id="su_btn_box">
+                  <button id="signup_btn" type="submit" onClick={onSubmit}>Log In</button>
+                </div>
+              </form>
+              <div className="already-switch">
+                <p className="su-li-already">Don't have an account? <button className="su-li-switch" onClick={() => setLoginOrSignup('signup')}>Sign up here.</button></p>
+              </div>
             </div>
           ) : (
 
@@ -65,11 +92,11 @@ function UserOptions({ afterLogin }) {
                     />
                 </div>
                 <div class="signup_input">
-                    <label className='signup_labels' htmlFor='email'>Password </label>
+                    <label className='signup_labels' htmlFor='password'>Password </label>
                     <input
                         className='signup_inputs'
                         type="password"
-                        id="email"
+                        id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -78,7 +105,9 @@ function UserOptions({ afterLogin }) {
                   <button id="signup_btn" type="submit" onClick={onSubmit}>Create Account</button>
                 </div>
               </form>
-              <p>Already have an account? <button onClick={() => setLoginOrSignup('login')}>Log in here.</button></p>
+              <div className="already-switch">
+              <p className="su-li-already">Already have an account? <button className="su-li-switch" onClick={() => setLoginOrSignup('login')}>Log in here.</button></p>
+              </div>
             </div>
           )
         }
