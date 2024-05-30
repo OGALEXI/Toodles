@@ -7,7 +7,24 @@ from models import User, Todo
 def get_users():
     users = User.query.all()
     json_users = list(map(lambda x: x.to_json(), users))
-    return jsonify({ "users": json_users })
+    return jsonify({ "users": json_users }), 200
+
+#LOGIN
+@app.route('/login', methods=["POST"])
+def login():
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    user = User.query.filter(User.email == email).first()
+
+    if not user:
+        return jsonify({ "message": "User not found." }), 400
+    
+    if user and not user.check_password(password):
+        return jsonify({ "message": "Password is incorrect."}), 400
+    
+    return jsonify({ "message": "Successfully logged in."}), 200
+
 
 #CREATE NEW USER
 @app.route('/new-user', methods=["POST"])
@@ -41,7 +58,7 @@ def get_user_todos(user_id):
     ).all()
     json_todos = list(map(lambda x: x.to_json(), todos))
 
-    return jsonify({'todos': json_todos})
+    return jsonify({'todos': json_todos}), 200
 
 #CREATE NEW _TODO
 @app.route('/new-todo/<int:user_id>', methods=["POST"])

@@ -2,7 +2,7 @@ import { useState } from "react";
 import './UserOptions.css';
 
 function UserOptions({ afterLogin }) {
-  const [loginOrSignup, setLoginOrSignup] = useState('signup');
+  const [loginOrSignup, setLoginOrSignup] = useState('login');
 
   //Signup data
   const [firstName, setFirstName] = useState('');
@@ -10,8 +10,46 @@ function UserOptions({ afterLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  //submit function
-  const onSubmit = (e) => {
+  //submit signup function
+  const submitSignUp = async (e) => {
+    e.preventDefault();
+
+    const newUser = {
+      firstName,
+      lastName,
+      email,
+      password
+    }
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newUser)
+    }
+
+    try {
+      const res = await fetch('http://localhost:8000/new-user', options);
+      if (res.status !== 201) {
+        const data = await res.json();
+        console.log(data.message)
+      } else {
+        //LOGIN USER
+        console.log("success")
+      }
+    } catch(e) {
+      console.log("An error occured", e)
+    }
+
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+  }
+
+  //submit login function
+  const submitLogin = (e) => {
     e.preventDefault();
   }
 
@@ -23,23 +61,25 @@ function UserOptions({ afterLogin }) {
 
             //LOGIN
 
-            <div class="log-sign-box">
+            <div className="log-sign-box">
               <h1>Login</h1>
               <form>
-              <div class="signup_input">
+              <div className="signup_input">
                     <label className='signup_labels' htmlFor='email'>Email </label>
                     <input
                         className='signup_inputs'
+                        required
                         type="text"
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div class="signup_input">
+                <div className="signup_input">
                     <label className='signup_labels' htmlFor='password'>Password </label>
                     <input
                         className='signup_inputs'
+                        required
                         type="password"
                         id="password"
                         value={password}
@@ -47,7 +87,7 @@ function UserOptions({ afterLogin }) {
                     />
                 </div>
                 <div id="su_btn_box">
-                  <button id="signup_btn" type="submit" onClick={onSubmit}>Log In</button>
+                  <button id="signup_btn" type="submit" onClick={submitLogin}>Log In</button>
                 </div>
               </form>
               <div className="already-switch">
@@ -58,43 +98,47 @@ function UserOptions({ afterLogin }) {
 
             //SIGNUP
 
-            <div class="log-sign-box">
+            <div className="log-sign-box">
               <h1>Signup</h1>
               <form id="signup-form">
-                <div class="signup_input">
+                <div className="signup_input">
                   <label className='signup_labels' htmlFor='firstName'>First Name </label>
                   <input
                       className='signup_inputs'
+                      required
                       type="text"
                       id="firstName"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                   />
                 </div>
-                <div class="signup_input">
+                <div className="signup_input">
                     <label className='signup_labels' htmlFor='lastName'>Last Name </label>
                     <input
                         className='signup_inputs'
+                        required
                         type="text"
                         id="lastName"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                     />
                 </div>
-                <div class="signup_input">
+                <div className="signup_input">
                     <label className='signup_labels' htmlFor='email'>Email </label>
                     <input
                         className='signup_inputs'
+                        required
                         type="text"
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div class="signup_input">
+                <div className="signup_input">
                     <label className='signup_labels' htmlFor='password'>Password </label>
                     <input
                         className='signup_inputs'
+                        required
                         type="password"
                         id="password"
                         value={password}
@@ -102,7 +146,7 @@ function UserOptions({ afterLogin }) {
                     />
                 </div>
                 <div id="su_btn_box">
-                  <button id="signup_btn" type="submit" onClick={onSubmit}>Create Account</button>
+                  <button id="signup_btn" type="submit" onClick={submitSignUp}>Create Account</button>
                 </div>
               </form>
               <div className="already-switch">
