@@ -1,11 +1,42 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './HomePage.css'
+import Completed from './Completed/Completed';
+import Upcoming from './Upcoming/Upcoming';
+
 
 function HomePage({ currUser, afterLogout }) {
   const [currTab, setCurrTab] = useState('upcoming');
+  const [completedTodos, setCompletedTodos] = useState([]);
+  const [upcomingTodos, setUpcomingTodos] = useState([]);
+  
+
+   //GET UPCOMING TODOS
+   const fetchUpcoming = async () => {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/upcoming/${currUser.id}`);
+        const data = await res.json();
+        setUpcomingTodos(data);
+    } catch (e) {
+        console.log("An error occurred.", e)
+    }
+   }
 
   //GET COMPLETED TODOS
-  //GET UPCOMING TODOS
+  const fetchCompleted = async () => {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/completed/${currUser.id}`);
+        const data = await res.json();
+        setCompletedTodos(data);
+    } catch (e) {
+        console.log("An error occurred.", e)
+    }
+  }
+
+  useEffect(() => {
+    fetchUpcoming()
+    fetchCompleted()
+  }, [])
+
   return (
     <>
       {
@@ -24,9 +55,9 @@ function HomePage({ currUser, afterLogout }) {
             </div>
             {
                 currTab == 'upcoming' ? (
-                    <h1>Upcominggg</h1>
+                    <Upcoming upcomingTodos={upcomingTodos}/>
                 ) : (
-                    <h1>Completeddd</h1>
+                    <Completed completedTodos={completedTodos} />
                 )
             }
         </section>

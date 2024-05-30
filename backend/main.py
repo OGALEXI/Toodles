@@ -69,7 +69,7 @@ def get_completed_todos(user_id):
 
     json_todos = list(map(lambda x: x.to_json(), completed_todos))
 
-    return jsonify({ "completed: ": json_todos }), 200
+    return json_todos, 200
 
 #GET UPCOMING TODOS
 @app.route('/upcoming/<int:user_id>', methods=["GET"])
@@ -80,7 +80,7 @@ def get_upcoming_todos(user_id):
 
     json_todos = list(map(lambda x: x.to_json(), upcoming_todos))
 
-    return jsonify({ "upcoming: ": json_todos }), 200
+    return json_todos, 200
 
 #CREATE NEW _TODO
 @app.route('/new-todo/<int:user_id>', methods=["POST"])
