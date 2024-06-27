@@ -9,7 +9,7 @@ function HomePage({ currUser, afterLogout }) {
   const [completedTodos, setCompletedTodos] = useState([]);
   const [upcomingTodos, setUpcomingTodos] = useState([]);
   
-
+    console.log(completedTodos)
    //GET UPCOMING TODOS
    const fetchUpcoming = async () => {
     try {

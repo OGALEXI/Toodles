@@ -41,7 +41,7 @@ class Todo(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
-    description = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(80), nullable=True)
     date_due = db.Column(db.String(80), nullable=False)
     completed = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

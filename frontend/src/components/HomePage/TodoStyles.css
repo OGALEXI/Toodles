@@ -1,0 +1,64 @@
+#new-todo-btn {
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin: 10px;
+    padding: 5px 10px 5px 10px;
+    transition: padding 100ms, margin 100ms;
+}
+
+#new-todo-btn:hover {
+    box-shadow: #eb12cba6 0px 3px 8px;
+    padding: 6px 12px 6px 12px;
+    margin-bottom: 8px
+}
+
+.todo_box {
+    background-color: white;
+    width: 85%;
+    height: 6rem;
+    margin: .5rem;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    transition: width 300ms, height 300ms;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+}
+
+.todo_box:hover {
+    height: 7rem;
+    width: 86%;
+    box-shadow: #eb12cba6 0px 3px 8px;
+}
+
+#todo-title {
+    font-size: 30px;
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+#todo-deats {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: rgb(64, 64, 64)
+}
+
+#due-and-check {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+#due-date-box > h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0px;
+}
