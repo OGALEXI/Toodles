@@ -14,6 +14,7 @@
     box-shadow: #eb12cba6 0px 3px 8px;
     padding: 6px 12px 6px 12px;
     margin-bottom: 8px;
+    cursor: pointer;
 }
 
 .todo_box {
@@ -21,7 +22,7 @@
     height: 6rem;
     margin: .5rem;
     border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    /* box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 16px 8px;  */
     transition: width 300ms, height 300ms;
     display: flex;
     justify-content: space-between;
@@ -55,7 +56,11 @@
 }
 
 #due-date-box {
+    margin: 0px;
     margin-right: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    padding: 0px;
 }
 
 #due-date-box > h2 {
@@ -113,7 +118,39 @@
     height: 90%;
     overflow-y: scroll;
     overflow-x: hidden;
-    border: 3px solid white;
     padding: 3px;
     margin: 10px;
+}
+
+#delete-all-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+#delete-all-btn > button {
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 10px 5px 10px;
+    transition: padding 100ms, margin 100ms;
+}
+
+#delete-all-btn > button:hover {
+    box-shadow: #eb12cba6 0px 3px 8px;
+    padding: 6px 12px 6px 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+#no-complete {
+    color: white;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: 100;
+    margin-top: 50px;
 }

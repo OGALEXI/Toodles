@@ -4,20 +4,16 @@ import Completed from './Completed/Completed';
 import Upcoming from './Upcoming/Upcoming';
 
 
-function HomePage({ currUser, afterLogout, openNewModal, upcomingTodos, completedTodos, refreshTodos }) {
+function HomePage({ currUser, afterLogout, openNewModal, upcomingTodos, completedTodos, refreshTodos, openDeleteModal }) {
   const [currTab, setCurrTab] = useState('upcoming');
   
   return (
     <>
-      {
-        //CREATE NEW TODO MODAL
-      }
       <div id="hp-main">
         <section id="homepage-header">
             <h1>Welcome, {currUser.firstName}</h1>
             <button id="logout_btn" onClick={afterLogout}>Log Out</button>
         </section>
-        {/* NEW TODO BUTTON */}
         <section id="todo-section">
             <div>
                 <button className="todo-tabs" onClick={() => setCurrTab('upcoming')}>Upcoming</button>
@@ -28,7 +24,7 @@ function HomePage({ currUser, afterLogout, openNewModal, upcomingTodos, complete
                 currTab == 'upcoming' ? (
                     <Upcoming upcomingTodos={upcomingTodos} refreshTodos={refreshTodos}/>
                 ) : (
-                    <Completed completedTodos={completedTodos} refreshTodos={refreshTodos}/>
+                    <Completed completedTodos={completedTodos} refreshTodos={refreshTodos} openDeleteModal={openDeleteModal} currUser={currUser}/>
                 )
             }
         </section>

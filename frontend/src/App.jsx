@@ -3,16 +3,25 @@ import './App.css';
 import UserOptions from './components/UserOptions/UserOptions';
 import HomePage from './components/HomePage/HomePage';
 import CreateTodo from './components/HomePage/CreateTodo/CreateTodo';
+import DeleteModal from './components/HomePage/DeleteModal/DeleteModal';
 
 function App() {
   //Modals
   const [isNewModalOpen, setNewModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [completedTodos, setCompletedTodos] = useState([]);
   const [upcomingTodos, setUpcomingTodos] = useState([]);
+  const [currTodo, setCurrTodo] = useState({});
 
   const openNewModal = () => {
     if (isNewModalOpen) return;
     setNewModalOpen(true);
+  }
+
+  const openDeleteModal = (todo) => {
+    if (isDeleteModalOpen) return;
+    setCurrTodo(todo);
+    setDeleteModalOpen(true);
   }
   
    //GET UPCOMING TODOS
@@ -40,6 +49,12 @@ function App() {
   const closeNewModal = () => {
     setNewModalOpen(false);
     fetchUpcoming();
+  }
+
+  const closeDeleteModal = () => {
+    setCurrTodo({});
+    setDeleteModalOpen(false);
+    fetchCompleted();
   }
 
   const refreshTodos = () => {
@@ -104,7 +119,17 @@ function App() {
               </div>
             )
           }
-          <HomePage currUser={currUser} afterLogout={afterLogout} openNewModal={openNewModal} completedTodos={completedTodos} upcomingTodos={upcomingTodos} refreshTodos={refreshTodos}/>
+          {
+            isDeleteModalOpen && (
+              <div className='modal' onClick={closeDeleteModal}>
+                <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+                  <span className='close' onClick={closeDeleteModal}>&times;</span>
+                  <DeleteModal currTodo={currTodo} closeDeleteModal={closeDeleteModal}/>
+                </div>
+              </div>
+            )
+          }
+          <HomePage currUser={currUser} afterLogout={afterLogout} openNewModal={openNewModal} completedTodos={completedTodos} upcomingTodos={upcomingTodos} refreshTodos={refreshTodos} openDeleteModal={openDeleteModal}/>
           </>
         ) : (
           <UserOptions afterLogin={afterLogin}/>

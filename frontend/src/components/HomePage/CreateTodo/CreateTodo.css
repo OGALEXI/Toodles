@@ -25,4 +25,18 @@
 #ntd-create-btn {
     text-align: center;
     margin:10px;
+    border: 2px solid #eb12cb;
+    background-color: white;
+    border-radius: 3px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 10px 5px 10px;
+    transition: padding 100ms, margin 100ms;
+}
+
+#ntd-create-btn:hover {
+    background-color: #eb12cbb1;
+    color: white;
+    cursor: pointer;
 }

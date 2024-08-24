@@ -105,7 +105,7 @@ def create_todo(user_id):
     return jsonify({ "message": new_todo.to_json() }), 201
 
 #TOGGLE COMPLETE
-@app.route('/toggle-complete/<int:todo_id>', methods=["POST"])
+@app.route('/toggle-complete/<int:todo_id>', methods=["GET"])
 def complete_todo(todo_id):
     todo = Todo.query.get(todo_id)
 
@@ -115,7 +115,7 @@ def complete_todo(todo_id):
     todo.completed = not todo.completed
 
     db.session.commit()
-    return jsonify({ "Completed state": todo.completed})
+    return jsonify({ "Completed state": todo.completed}), 200
     
 
 #DELETE _TODO
@@ -130,6 +130,27 @@ def delete_todo(todo_id):
     db.session.commit()
 
     return jsonify({ "message": "Todo successfully deleted."}), 200
+
+#DELETE ALL COMPLETED _TODOS
+@app.route('/delete-all/<int:user_id>', methods=["DELETE"])
+def delete_all_completed(user_id):
+    Todo.query.filter(
+        Todo.user_id == user_id
+    ).filter(Todo.completed == True).delete()
+
+    after = Todo.query.filter(
+        Todo.user_id == user_id
+    ).filter(Todo.completed == True).all()
+
+    
+    if len(after) != 0:
+        return jsonify({ "message": "An error occurred."}), 500
+    
+    db.session.commit()
+
+    return jsonify({ "message": "All todos deleted." }), 200
+
+
 
 if __name__ == "__main__":
     with app.app_context():
