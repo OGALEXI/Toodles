@@ -2,8 +2,57 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import UserOptions from './components/UserOptions/UserOptions';
 import HomePage from './components/HomePage/HomePage';
+import CreateTodo from './components/HomePage/CreateTodo/CreateTodo';
 
 function App() {
+  //Modals
+  const [isNewModalOpen, setNewModalOpen] = useState(false);
+  const [completedTodos, setCompletedTodos] = useState([]);
+  const [upcomingTodos, setUpcomingTodos] = useState([]);
+
+  const openNewModal = () => {
+    if (isNewModalOpen) return;
+    setNewModalOpen(true);
+  }
+  
+   //GET UPCOMING TODOS
+   const fetchUpcoming = async () => {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/upcoming/${currUser.id}`);
+        const data = await res.json();
+        setUpcomingTodos(data);
+    } catch (e) {
+        console.log("An error occurred.", e)
+    }
+   }
+
+  //GET COMPLETED TODOS
+  const fetchCompleted = async () => {
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/completed/${currUser.id}`);
+        const data = await res.json();
+        setCompletedTodos(data);
+    } catch (e) {
+        console.log("An error occurred.", e)
+    }
+  }
+
+  const closeNewModal = () => {
+    setNewModalOpen(false);
+    fetchUpcoming();
+  }
+
+  const refreshTodos = () => {
+    fetchUpcoming()
+    fetchCompleted()
+  }
+
+  useEffect(() => {
+    fetchUpcoming()
+    fetchCompleted()
+  }, [])
+
+
   //Go into localStorage and see if we're logged in
   const [loggedIn, setLoggedIn] = useState(() => {
     const storedLogin = localStorage.getItem('loggedIn');
@@ -44,7 +93,19 @@ function App() {
     <>
       {
         loggedIn ? (
-          <HomePage currUser={currUser} afterLogout={afterLogout} />
+          <>
+          {
+            isNewModalOpen && (
+              <div className='modal' onClick={closeNewModal}>
+                <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+                  <span className='close' onClick={closeNewModal}>&times;</span>
+                  <CreateTodo userId={currUser.id} closeNewModal={closeNewModal}/>
+                </div>
+              </div>
+            )
+          }
+          <HomePage currUser={currUser} afterLogout={afterLogout} openNewModal={openNewModal} completedTodos={completedTodos} upcomingTodos={upcomingTodos} refreshTodos={refreshTodos}/>
+          </>
         ) : (
           <UserOptions afterLogin={afterLogin}/>
         )

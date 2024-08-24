@@ -1,0 +1,28 @@
+.ntd-input {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.ntd-labels {
+    font-family: 'Roboto', sans-serif;;
+    margin-bottom: 5px;
+    font-size: large;
+    font-weight: 300;
+}
+
+.ntd-inputs {
+    line-height: 2;
+}
+
+#ntd-header {
+    text-align: center;
+    margin-left: 10px;
+    font-family:'Roboto', sans-serif;;
+    font-weight: 300;
+}
+
+#ntd-create-btn {
+    text-align: center;
+    margin:10px;
+}

@@ -118,7 +118,18 @@ def complete_todo(todo_id):
     return jsonify({ "Completed state": todo.completed})
     
 
+#DELETE _TODO
+@app.route('/delete/<int:todo_id>', methods=["DELETE"])
+def delete_todo(todo_id):
+    todo = Todo.query.get(todo_id)
 
+    if not todo:
+        return jsonify({ "message": "Todo not found." }), 404
+    
+    db.session.delete(todo)
+    db.session.commit()
+
+    return jsonify({ "message": "Todo successfully deleted."}), 200
 
 if __name__ == "__main__":
     with app.app_context():

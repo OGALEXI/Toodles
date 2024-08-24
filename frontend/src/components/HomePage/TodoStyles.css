@@ -13,12 +13,11 @@
 #new-todo-btn:hover {
     box-shadow: #eb12cba6 0px 3px 8px;
     padding: 6px 12px 6px 12px;
-    margin-bottom: 8px
+    margin-bottom: 8px;
 }
 
 .todo_box {
     background-color: white;
-    width: 85%;
     height: 6rem;
     margin: .5rem;
     border-radius: 3px;
@@ -26,13 +25,12 @@
     transition: width 300ms, height 300ms;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 1.5%;
     align-items: center;
 }
 
 .todo_box:hover {
     height: 7rem;
-    width: 86%;
     box-shadow: #eb12cba6 0px 3px 8px;
 }
 
@@ -56,9 +54,66 @@
     padding: 0px;
 }
 
+#due-date-box {
+    margin-right: 10px;
+}
+
 #due-date-box > h2 {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 26px;
-    margin: 0px;
+    margin-top: 8px;
+}
+
+#complete-btn-up {
+    margin: 16px;
+    position: relative;
+}
+
+#complete-img {
+    cursor: pointer;
+}
+
+#complete-btn-up #compl-tooltip {
+    width: 7rem;
+    text-align: center;
+    padding: 5px;
+    visibility: hidden;
+    position: absolute;
+    background-color: rgb(10, 3, 55);
+    color: white;
+    top: -40px;
+    left: -44px;
+    opacity: 0;
+    transition: opacity 500ms;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    border-radius: 3px;
+}
+
+/* Tooltip arrow */
+#complete-btn-up #compl-tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(10, 3, 55) transparent transparent transparent;
+}
+
+#complete-btn-up:hover #compl-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+#todo-holder {
+    width: 85%;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 3px solid white;
+    padding: 3px;
+    margin: 10px;
 }

@@ -4,39 +4,9 @@ import Completed from './Completed/Completed';
 import Upcoming from './Upcoming/Upcoming';
 
 
-function HomePage({ currUser, afterLogout }) {
+function HomePage({ currUser, afterLogout, openNewModal, upcomingTodos, completedTodos, refreshTodos }) {
   const [currTab, setCurrTab] = useState('upcoming');
-  const [completedTodos, setCompletedTodos] = useState([]);
-  const [upcomingTodos, setUpcomingTodos] = useState([]);
   
-    console.log(completedTodos)
-   //GET UPCOMING TODOS
-   const fetchUpcoming = async () => {
-    try {
-        const res = await fetch(`http://127.0.0.1:8000/upcoming/${currUser.id}`);
-        const data = await res.json();
-        setUpcomingTodos(data);
-    } catch (e) {
-        console.log("An error occurred.", e)
-    }
-   }
-
-  //GET COMPLETED TODOS
-  const fetchCompleted = async () => {
-    try {
-        const res = await fetch(`http://127.0.0.1:8000/completed/${currUser.id}`);
-        const data = await res.json();
-        setCompletedTodos(data);
-    } catch (e) {
-        console.log("An error occurred.", e)
-    }
-  }
-
-  useEffect(() => {
-    fetchUpcoming()
-    fetchCompleted()
-  }, [])
-
   return (
     <>
       {
@@ -53,11 +23,12 @@ function HomePage({ currUser, afterLogout }) {
                 <button className="todo-tabs" onClick={() => setCurrTab('upcoming')}>Upcoming</button>
                 <button className="todo-tabs" onClick={() => setCurrTab('completed')}>Completed</button>
             </div>
+            <button id="new-todo-btn" onClick={() => openNewModal()}>+ New Todo</button>
             {
                 currTab == 'upcoming' ? (
-                    <Upcoming upcomingTodos={upcomingTodos}/>
+                    <Upcoming upcomingTodos={upcomingTodos} refreshTodos={refreshTodos}/>
                 ) : (
-                    <Completed completedTodos={completedTodos} />
+                    <Completed completedTodos={completedTodos} refreshTodos={refreshTodos}/>
                 )
             }
         </section>

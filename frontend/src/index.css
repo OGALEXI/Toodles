@@ -1,8 +1,14 @@
 :root {
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
   background-image: linear-gradient(to right bottom, #5e17eb, #5e17eb, #9101e3, #d300d4, #eb12cc);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+html {
+  height: 100%;
+  
 }
 
 /* 
